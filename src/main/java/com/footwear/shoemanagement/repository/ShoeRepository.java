@@ -16,5 +16,6 @@ public interface ShoeRepository extends JpaRepository<Shoes, Integer>{
 //	public List<Shoes> deleteAllBySellerId(int sellerId);
 
 	public List<Shoes> deleteBySellerId(int sellerId);
+	// List is used as there could be many products added from same user
 
 }

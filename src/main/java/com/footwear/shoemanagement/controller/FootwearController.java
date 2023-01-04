@@ -1,6 +1,6 @@
 package com.footwear.shoemanagement.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +37,9 @@ public class FootwearController {
 	private BuyerService buyerService;
 	
 	@RequestMapping("/getEnteredData")
-	public ResponseEntity<List<Buyer>> getEnteredData() throws JsonMappingException, JsonProcessingException
+	public ResponseEntity<Map<String, Object>> getEnteredData() throws JsonMappingException, JsonProcessingException
 	{
-		List<Buyer> listBuyer= buyerService.getEnteredList();
+		Map<String, Object> listBuyer= buyerService.getEnteredList();
 		return ResponseEntity.ok(listBuyer);
 	}	
 	
@@ -59,10 +59,9 @@ public class FootwearController {
 	private BuyerLogin buyerLogin;
 	
 	@RequestMapping("/loginBuyer")
-	public ResponseEntity<List<Object>> loginUser(@RequestHeader("userName") String userName,@RequestHeader("password") String password) throws JsonMappingException, JsonProcessingException
+	public ResponseEntity<Map<String, Object>> loginUser(@RequestHeader("userName") String userName,@RequestHeader("password") String password) throws JsonMappingException, JsonProcessingException
 	{
-		ResponseEntity<List<Object>> s=buyerLogin.getBuyer(userName,password);
-		return s;
+		return buyerLogin.getBuyer(userName,password);
 	}
 	
 	@Autowired
@@ -126,7 +125,7 @@ public class FootwearController {
 	private AddShoes addShoes;
 	
 	@RequestMapping("/loginBuyer/addShoes")
-	public List<Object> addShoesToDB(@RequestBody Shoes shoe,@RequestHeader long skey,@RequestHeader int userid) throws JsonMappingException, JsonProcessingException
+	public Map<String, Object> addShoesToDB(@RequestBody Shoes shoe,@RequestHeader long skey,@RequestHeader int userid) throws JsonMappingException, JsonProcessingException
 	{
 		return addShoes.addShoeDetails(shoe,userid,skey);
 	}

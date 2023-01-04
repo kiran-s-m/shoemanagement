@@ -1,7 +1,7 @@
 package com.footwear.shoemanagement.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,22 +20,23 @@ public class AddShoes {
 	@Autowired
 	private BuyerRepository buyerRepository;
 	
-	public List<Object> addShoeDetails(Shoes shoe,int userid,long skey)
+	public Map<String, Object> addShoeDetails(Shoes shoe,int userid,long skey)
 	{
-		List<Object>list=new ArrayList<>();
+		Map<String, Object> shoeMap=new HashMap<>();
 		Buyer b1=buyerRepository.getById(userid);
 		System.out.println(b1.getMobileno());
 		if(b1.getsKey()==skey)
 		{
 			shoe.setSellerId(userid);
 			Shoes s1=shoeRepository.save(shoe);
-			list.add(s1);
+			shoeMap.put("objects", s1);
+			
 		}
 		else
 		{
-			list.add("User session expired");
+			shoeMap.put("msg", "User session expired");
 		}
-		return list;
+		return shoeMap;
 		
 	}
 }

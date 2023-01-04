@@ -1,8 +1,6 @@
 package com.footwear.shoemanagement.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.footwear.shoemanagement.model.Buyer;
-import com.footwear.shoemanagement.model.Shoes;
 import com.footwear.shoemanagement.repository.BuyerRepository;
 import com.footwear.shoemanagement.repository.ShoeRepository;
 
@@ -27,10 +24,12 @@ public class BuyerLogin {
 	@Autowired
 	private ShoeRepository shoeRepository;
 	
-	public ResponseEntity<List<Object>> getBuyer(String username,String password)
+	public ResponseEntity<Map<String, Object>> getBuyer(String username,String password)
 	{	
 		 Buyer b1 = buyerRepository.getByUsername(username);
-		 List<Object>list=new ArrayList<>();
+		 
+		 Map<String, Object>list=new HashMap<>();
+
 		 if(b1!=null)
 		 {
 			 if(b1.getPassword().equals(password))
@@ -44,19 +43,21 @@ public class BuyerLogin {
 				System.out.println("Logged in successfully");
 //				return "Logged in successfully";
 
-				list.add("User logged in successfully");
+				list.put("msg", "User logged in successfully");
 				
-				list.add(b1.getUserid());
-				list.add(skey);
-				list.add(username);
-				list.add(shoeRepository.findAll());
+				list.put("userid", b1.getUserid());
+				list.put("skey", skey);
+				list.put("username", username);
+
+				list.put("shoes", shoeRepository.findAll());
+				
 				return ResponseEntity.status(200).body(list);
 				}
 			else
 			{
 				System.out.println("Password is incorrect");
 //				return "Password is incorrect";
-				list.add("Password is incorrect...");
+				list.put("msg","Password is incorrect...");
 				return ResponseEntity.status(401).body(list);
 			}
 		 }
@@ -64,7 +65,7 @@ public class BuyerLogin {
 		 {
 			System.out.println("User does not exist");
 //			return "User does not exist";
-			list.add("User does not exist");
+			list.put("msg","User does not exist");
 			return ResponseEntity.status(401).body(list);
 		 }
 		 
