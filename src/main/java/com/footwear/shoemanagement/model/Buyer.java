@@ -1,5 +1,9 @@
 package com.footwear.shoemanagement.model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +16,7 @@ public class Buyer {
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userid;
 
 	
@@ -37,11 +41,57 @@ public class Buyer {
 	@Column(nullable = false, unique = true, length = 60)
 	private String email;
 	
-	
 	private long sKey;
 	
-//	private String creationdate;
-//	private String updatedate;
+	
+	
+	
+	
+	
+	
+//	List<Integer>cart=new ArrayList<>();
+	private int[] cart;
+	
+	public int[] getCart() {
+		return cart;
+	}
+	public void setCart(int[] cart) {
+		this.cart = cart;
+	}
+	
+	private LocalDateTime createdDate;
+	
+	private LocalDateTime currentLoginDate;
+	
+	private LocalDateTime lastLoginDate=null;
+	
+	public LocalDateTime getCurrentLoginDate() {
+		return currentLoginDate;
+	}
+	public void setCurrentLoginDate(LocalDateTime currentLoginDate) {
+		this.currentLoginDate = currentLoginDate;
+	}
+	public LocalDateTime getLastLoginDate() {
+		return lastLoginDate;
+	}
+	public void setLastLoginDate(LocalDateTime lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
+	}
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(LocalDateTime localDateTime) {
+		this.createdDate = localDateTime;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -75,14 +125,6 @@ public class Buyer {
 	public String getEmail() {
 		return email;
 	}
-	
-	
-//	public String getCreationdate() {
-//		return creationdate;
-//	}
-//	public String getUpdatedate() {
-//		return updatedate;
-//	}
 	
 	public void setUserid(int userid) {
 		this.userid = userid;

@@ -1,5 +1,6 @@
 package com.footwear.shoemanagement.service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,9 @@ public class AddShoes {
 		System.out.println(b1.getMobileno());
 		if(b1.getsKey()==skey)
 		{
+			LocalDateTime addedDate=LocalDateTime.now();
 			shoe.setSellerId(userid);
+			shoe.setAddedDate(addedDate);
 			Shoes s1=shoeRepository.save(shoe);
 			shoeMap.put("objects", s1);
 			

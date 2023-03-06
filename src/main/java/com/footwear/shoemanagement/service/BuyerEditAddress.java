@@ -16,20 +16,20 @@ public class BuyerEditAddress {
 	
 	
 	
-	public ResponseEntity<String> editBuyerAddress(String userName, String password,long skey, Buyer buyer)
+	public ResponseEntity<String> editBuyerAddress(String userName, String password,long skey, String newAddress)
 	{
 		Buyer b1=buyerRepository.getByUsername(userName);
 		if(b1.getsKey()==skey) 
 		{
 			if(b1.getPassword().equals(password))
 			{
-				if(buyer.getAddress().isBlank())
+				if(newAddress.isBlank())
 				{
 					return ResponseEntity.status(400).body("Address cannot be blank");
 				}
 				else
 				{
-					b1.setAddress(buyer.getAddress());
+					b1.setAddress(newAddress);
 					
 					buyerRepository.save(b1);
 					return ResponseEntity.status(200).body("Address updated");

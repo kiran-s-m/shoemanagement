@@ -15,7 +15,7 @@ public class BuyerEditPassword {
 	private BuyerRepository buyerRepository;
 		
 
-	public ResponseEntity<String> editBuyerPassword(String userName, String password,long skey, Buyer buyer)
+	public ResponseEntity<String> editBuyerPassword(String userName, String password,long skey, String newPassword)
 	{
 		Buyer b1=buyerRepository.getByUsername(userName);
 		
@@ -23,18 +23,18 @@ public class BuyerEditPassword {
 		{
 			if(b1.getPassword().equals(password))
 			{
-				if(buyer.getPassword().isBlank())
+				if(newPassword.isBlank())
 				{
 					return ResponseEntity.status(400).body("Password cannot be blank");
 				}
 				else
-				if(buyer.getPassword().contains(" "))
+				if(newPassword.contains(" "))
 				{
 					return ResponseEntity.status(400).body("Password cannot contain spaces");
 				}
 				else
 				{
-					b1.setPassword(buyer.getPassword());
+					b1.setPassword(newPassword);
 					buyerRepository.save(b1);
 					return ResponseEntity.status(200).body("Password updated");
 				}

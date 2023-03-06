@@ -1,12 +1,11 @@
 package com.footwear.shoemanagement.service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.footwear.shoemanagement.model.Buyer;
 import com.footwear.shoemanagement.repository.BuyerRepository;
 import com.footwear.shoemanagement.repository.ShoeRepository;
@@ -35,20 +34,29 @@ public class BuyerLogin {
 			 if(b1.getPassword().equals(password))
 				{
 				long skey=(long) (Math.random()*100000000);
+				
+				LocalDateTime loginDate=LocalDateTime.now();
+				LocalDateTime lastLoginDate=b1.getCurrentLoginDate();
+				
+				b1.setLastLoginDate(lastLoginDate);
+				b1.setCurrentLoginDate(loginDate);
+				
 				b1.setsKey(skey);
 				signup.saveBuyer(b1);
-				System.out.println(skey);
-	 
 				
 				System.out.println("Logged in successfully");
 //				return "Logged in successfully";
+				System.out.println(skey);
+				System.out.println("Last login: "+lastLoginDate);
 
+				
 				list.put("msg", "User logged in successfully");
 				
 				list.put("userid", b1.getUserid());
 				list.put("skey", skey);
 				list.put("username", username);
-
+				list.put("lastLogin", lastLoginDate);
+				
 				list.put("shoes", shoeRepository.findAll());
 				
 				return ResponseEntity.status(200).body(list);

@@ -72,21 +72,21 @@ public class BuyerEditName {
 //		
 //	}
 	
-	public ResponseEntity<String> editBuyerName(String userName, String password,long skey, Buyer buyer)
+	public ResponseEntity<String> editBuyerName(String userName, String password,long skey, String newFirstName, String newLastName)
 	{
 		Buyer b1=buyerRepository.getByUsername(userName);
 		if(b1.getsKey()==skey) 
 		{
 			if(b1.getPassword().equals(password))
 			{
-				if(buyer.getFirstName().isBlank() || buyer.getLastName().isBlank())
+				if(newFirstName.isBlank() || newLastName.isBlank())
 				{
 					return ResponseEntity.status(400).body("Name cannot be blank");
 				}
 				else
 				{
-					b1.setFirstName(buyer.getFirstName());
-					b1.setLastName(buyer.getLastName());
+					b1.setFirstName(newFirstName);
+					b1.setLastName(newLastName);
 					
 					buyerRepository.save(b1);
 					return ResponseEntity.status(200).body("Name updated");

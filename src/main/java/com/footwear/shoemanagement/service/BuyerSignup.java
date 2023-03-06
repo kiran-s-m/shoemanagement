@@ -1,5 +1,7 @@
 package com.footwear.shoemanagement.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,8 @@ public class BuyerSignup {
 			
 		else
 		{
+			LocalDateTime createdDate=LocalDateTime.now();
+			buyer.setCreatedDate(createdDate);
 			saveBuyer(buyer);
 			System.out.println("User registered succesfully...");
 			return ResponseEntity.status(200).body("User registered succesfully...");

@@ -1,5 +1,7 @@
 package com.footwear.shoemanagement.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,70 @@ public class Shoes {
 	@Column(nullable = false)
 	private double rating;
 	
+	@Column(nullable = false)
 	private int sellerId;
+
+	
+	
+	
+	
+//	private boolean inCart;
+//	
+//	private int inCartUserId;
+//	
+//	public boolean isInCart() {
+//		return inCart;
+//	}
+//
+//	public void setInCart(boolean inCart) {
+//		this.inCart = inCart;
+//	}
+//
+//	public int getInCartUserId() {
+//		return inCartUserId;
+//	}
+//
+//	public void setInCartUserId(int inCartUserId) {
+//		this.inCartUserId = inCartUserId;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	private LocalDateTime addedDate;
+	
+	private LocalDateTime updateDate=null;
+	
+	public LocalDateTime getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(LocalDateTime addedDate2) {
+		this.addedDate = addedDate2;
+	}
+
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int getShoeid() {
 		return shoeid;
